@@ -1,0 +1,803 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CARGO_AUTOMATICO">
+          <Key>
+            <PropertyRef Name="ID_CARGO" />
+          </Key>
+          <Property Name="ID_CARGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MONTO" Type="number" Precision="8" Scale="2" />
+          <Property Name="NUMERO_TARJETA" Type="varchar2" MaxLength="50" />
+          <Property Name="FECHA_APLICACION" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_TIPO_CARGO" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" />
+          <Property Name="PRIMER_APELLIDO" Type="varchar2" MaxLength="50" />
+          <Property Name="SEGUNDO_APELLIDO" Type="varchar2" MaxLength="50" />
+          <Property Name="CEDULA" Type="varchar2" MaxLength="20" />
+          <Property Name="ID_TIPO_CLIENTE" Type="number" Precision="38" Scale="0" />
+          <Property Name="SALARIO" Type="number" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="ID_CUENTA" />
+          </Key>
+          <Property Name="ID_CUENTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_CUENTA" Type="varchar2" MaxLength="50" />
+          <Property Name="ID_TIPO_CUENTA" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_CLIENTE" Type="number" Precision="38" Scale="0" />
+          <Property Name="SALDO_REAL" Type="number" Precision="8" Scale="2" />
+          <Property Name="PAGO_MINIMO" Type="number" Precision="8" Scale="2" />
+          <Property Name="SALDO_ULTIMO_PAGO_MINIMO" Type="number" Precision="8" Scale="2" />
+          <Property Name="INTERESES_MORATORIOS" Type="number" Precision="8" Scale="2" />
+          <Property Name="SALDO_PAGO_CONTADO" Type="number" Precision="8" Scale="2" />
+          <Property Name="SALDO_CORTE" Type="number" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="MARCA_TARJETA">
+          <Key>
+            <PropertyRef Name="ID_MARCA_TARJETA" />
+          </Key>
+          <Property Name="ID_MARCA_TARJETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MARCA" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PAGO">
+          <Key>
+            <PropertyRef Name="ID_PAGO" />
+          </Key>
+          <Property Name="ID_PAGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_CUENTA" Type="varchar2" MaxLength="50" />
+          <Property Name="MONTO_PAGO" Type="number" Precision="8" Scale="2" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <EntityType Name="TARJETA">
+          <Key>
+            <PropertyRef Name="ID_TARJETA" />
+          </Key>
+          <Property Name="ID_TARJETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_TARJETA" Type="varchar2" MaxLength="50" />
+          <Property Name="ID_CUENTA" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_MARCA_TARJETA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CODIGO_SEGURIDAD" Type="varchar2" MaxLength="10" />
+          <Property Name="LIMITE" Type="number" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="TIPO_CARGO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_CARGO" />
+          </Key>
+          <Property Name="ID_TIPO_CARGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO_CARGO" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TIPO_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_TIPO_CLIENTE" />
+          </Key>
+          <Property Name="ID_TIPO_CLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO_CLIENTE" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TIPO_CUENTA">
+          <Key>
+            <PropertyRef Name="ID_TIPO_CUENTA" />
+          </Key>
+          <Property Name="ID_TIPO_CUENTA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO_CUENTA" Type="varchar2" MaxLength="50" />
+          <Property Name="TASA_INTERES_DIARIA" Type="number" Precision="8" Scale="2" />
+          <Property Name="TASA_MORA" Type="number" Precision="8" Scale="2" />
+          <Property Name="DIAS_PAGO_MINIMO" Type="number" Precision="38" Scale="0" />
+          <Property Name="DIAS_PAGO_CONTADO" Type="number" Precision="38" Scale="0" />
+          <Property Name="DIA_CORTE" Type="number" Precision="38" Scale="0" />
+          <Property Name="COMISION_RETIRO" Type="number" Precision="8" Scale="2" />
+          <Property Name="COMISION_ADMINISTRACION" Type="number" Precision="8" Scale="2" />
+          <Property Name="MESES_FINANCIACION" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="TIPO_TRANSACCION">
+          <Key>
+            <PropertyRef Name="ID_TIPO_TRANSACCION" />
+          </Key>
+          <Property Name="ID_TIPO_TRANSACCION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO_TRANSACCION" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TRANSACCION">
+          <Key>
+            <PropertyRef Name="ID_TRANSACCION" />
+          </Key>
+          <Property Name="ID_TRANSACCION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIPO_TRANSACCION" Type="number" Precision="38" Scale="0" />
+          <Property Name="MONTO" Type="number" Precision="8" Scale="2" />
+          <Property Name="NUMERO_CUENTA" Type="varchar2" MaxLength="50" />
+          <Property Name="CUENTA_REFERENCIA" Type="varchar2" MaxLength="50" />
+          <Property Name="FECHA" Type="date" />
+        </EntityType>
+        <Function Name="ACTUALIZAR_CARGO_AUTOMATICO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_CARGOP" Type="number" Mode="In" />
+          <Parameter Name="MONTOP" Type="number" Mode="In" />
+          <Parameter Name="NUMERO_TARJETAP" Type="varchar2" Mode="In" />
+          <Parameter Name="FECHA_APLICACIONP" Type="number" Mode="In" />
+          <Parameter Name="ID_TIPO_CARGOP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_CLIENTE_P" Type="varchar2" Mode="In" />
+          <Parameter Name="NOMBRE_P" Type="varchar2" Mode="In" />
+          <Parameter Name="PRIMER_APELLIDO_P" Type="varchar2" Mode="In" />
+          <Parameter Name="SEGUNDO_APELLIDO_P" Type="varchar2" Mode="In" />
+          <Parameter Name="CEDULA_P" Type="varchar2" Mode="In" />
+          <Parameter Name="ID_TIPO_CLIENTE" Type="number" Mode="In" />
+          <Parameter Name="SALARIO_P" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_MARCA_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_MARCA_TARJETAP" Type="number" Mode="In" />
+          <Parameter Name="MARCAP" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_PAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_PAGOP" Type="number" Mode="In" />
+          <Parameter Name="NUMERO_CUENTAP" Type="varchar2" Mode="In" />
+          <Parameter Name="MONTO_PAGOP" Type="number" Mode="In" />
+          <Parameter Name="FECHAP" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TARJETAP" Type="number" Mode="In" />
+          <Parameter Name="NUMERO_TARJETAP" Type="varchar2" Mode="In" />
+          <Parameter Name="ID_CUENTAP" Type="number" Mode="In" />
+          <Parameter Name="ID_MARCA_TARJETAP" Type="number" Mode="In" />
+          <Parameter Name="CODIGO_SEGURIDADP" Type="varchar2" Mode="In" />
+          <Parameter Name="LIMITEP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_TIPO_CARGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_CARGOP" Type="number" Mode="In" />
+          <Parameter Name="TIPO_CARGOP" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_TIPOCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_CLIENTEP" Type="number" Mode="In" />
+          <Parameter Name="TIPO_CLIENTEP" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_TIPOCUENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_CUENTAP" Type="number" Mode="In" />
+          <Parameter Name="TIPO_CUENTAP" Type="varchar2" Mode="In" />
+          <Parameter Name="TASA_INTERES_DIARIAP" Type="number" Mode="In" />
+          <Parameter Name="TASA_MORAP" Type="number" Mode="In" />
+          <Parameter Name="DIAS_PAGO_MINIMOP" Type="number" Mode="In" />
+          <Parameter Name="DIAS_PAGO_CONTADOP" Type="number" Mode="In" />
+          <Parameter Name="DIA_CORTEP" Type="number" Mode="In" />
+          <Parameter Name="COMISION_RETIROP" Type="number" Mode="In" />
+          <Parameter Name="COMISION_ADMINISTRACIONP" Type="number" Mode="In" />
+          <Parameter Name="MESES_FINANCIACIONP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_TIPO_TRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_TRANSACCIONP" Type="number" Mode="In" />
+          <Parameter Name="TIPO_TRANSACCIONP" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ACTUALIZAR_TRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TRANSACCIONP" Type="number" Mode="In" />
+          <Parameter Name="ID_TIPO_TRANSACCIONP" Type="number" Mode="In" />
+          <Parameter Name="MONTOP" Type="number" Mode="In" />
+          <Parameter Name="NUMERO_CUENTAP" Type="varchar2" Mode="In" />
+          <Parameter Name="CUENTA_REFERENCIAP" Type="varchar2" Mode="In" />
+          <Parameter Name="FECHAP" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_CARGO_AUTOMATICO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_CARGOP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_CLIENTE_P" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_CUENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_CUENTAP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_MARCA_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_MARCA_TARJETAP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_PAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_PAGOP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TARJETAP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_TIPO_CARGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_CARGOP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_TIPOCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPOCLIENTE_P" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_TIPOCUENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPOCUENTA_P" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_TIPO_TRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_TRANSACCIONP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="ELIMINAR_TRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TRANSACCIONP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_CARGO_AUTOMATICO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_CARGOP" Type="number" Mode="In" />
+          <Parameter Name="MONTOP" Type="number" Mode="In" />
+          <Parameter Name="NUMERO_TARJETAP" Type="varchar2" Mode="In" />
+          <Parameter Name="FECHA_APLICACIONP" Type="number" Mode="In" />
+          <Parameter Name="ID_TIPO_CARGOP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_CLIENTE_P" Type="varchar2" Mode="In" />
+          <Parameter Name="NOMBRE_P" Type="varchar2" Mode="In" />
+          <Parameter Name="PRIMER_APELLIDO_P" Type="varchar2" Mode="In" />
+          <Parameter Name="SEGUNDO_APELLIDO_P" Type="varchar2" Mode="In" />
+          <Parameter Name="CEDULA_P" Type="varchar2" Mode="In" />
+          <Parameter Name="ID_TIPO_CLIENTE" Type="number" Mode="In" />
+          <Parameter Name="SALARIO_P" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_MARCA_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_MARCA_TARJETAP" Type="number" Mode="In" />
+          <Parameter Name="MARCAP" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_PAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_PAGOP" Type="number" Mode="In" />
+          <Parameter Name="NUMERO_CUENTAP" Type="varchar2" Mode="In" />
+          <Parameter Name="MONTO_PAGOP" Type="number" Mode="In" />
+          <Parameter Name="FECHAP" Type="date" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TARJETAP" Type="number" Mode="In" />
+          <Parameter Name="NUMERO_TARJETAP" Type="varchar2" Mode="In" />
+          <Parameter Name="ID_CUENTAP" Type="number" Mode="In" />
+          <Parameter Name="ID_MARCA_TARJETAP" Type="number" Mode="In" />
+          <Parameter Name="CODIGO_SEGURIDADP" Type="varchar2" Mode="In" />
+          <Parameter Name="LIMITEP" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_TIPO_CARGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_CARGOP" Type="number" Mode="In" />
+          <Parameter Name="TIPO_CARGOP" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_TIPOCLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_CLIENTEP" Type="number" Mode="In" />
+          <Parameter Name="TIPO_CLIENTEP" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_TIPOCUENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_CUENTAP" Type="number" Mode="In" />
+          <Parameter Name="TIPO_CUENTAP" Type="varchar2" Mode="In" />
+          <Parameter Name="TASA_INTERES_DIARIAP" Type="number" Mode="In" />
+          <Parameter Name="TASA_MORAP" Type="number" Mode="In" />
+          <Parameter Name="DIAS_PAGO_MINIMOP" Type="number" Mode="In" />
+          <Parameter Name="DIAS_PAGO_CONTADOP" Type="number" Mode="In" />
+          <Parameter Name="DIA_CORTEP" Type="number" Mode="In" />
+          <Parameter Name="COMISION_RETIROP" Type="number" Mode="In" />
+          <Parameter Name="COMISION_ADMINISTRACIONP" Type="number" Mode="In" />
+          <Parameter Name="MESES_FINANCIACION" Type="number" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_TIPO_TRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TIPO_TRANSACCIONP" Type="number" Mode="In" />
+          <Parameter Name="TIPO_TRANSACCIONP" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="INSERTAR_TRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES">
+          <Parameter Name="ID_TRANSACCIONP" Type="number" Mode="In" />
+          <Parameter Name="ID_TIPO_TRANSACCIONP" Type="number" Mode="In" />
+          <Parameter Name="MONTOP" Type="number" Mode="In" />
+          <Parameter Name="NUMERO_CUENTAP" Type="varchar2" Mode="In" />
+          <Parameter Name="CUENTA_REFERENCIAP" Type="varchar2" Mode="In" />
+          <Parameter Name="FECHAP" Type="date" Mode="In" />
+        </Function>
+        <Function Name="OBTENER_CARGO_AUTOMATICO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_CLIENTES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_CUENTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_MARCA_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_PAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_TARJETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_TIPO_CARGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_TIPO_CLIENTES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_TIPO_TRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <Function Name="OBTENER_TRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROYECTO_LENGUAJES" />
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="CARGO_AUTOMATICO" EntityType="Self.CARGO_AUTOMATICO" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="MARCA_TARJETA" EntityType="Self.MARCA_TARJETA" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="PAGO" EntityType="Self.PAGO" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="TARJETA" EntityType="Self.TARJETA" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="TIPO_CARGO" EntityType="Self.TIPO_CARGO" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="TIPO_CLIENTE" EntityType="Self.TIPO_CLIENTE" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="TIPO_CUENTA" EntityType="Self.TIPO_CUENTA" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="TIPO_TRANSACCION" EntityType="Self.TIPO_TRANSACCION" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+          <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" Schema="PROYECTO_LENGUAJES" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CARGO_AUTOMATICO">
+          <Key>
+            <PropertyRef Name="ID_CARGO" />
+          </Key>
+          <Property Name="ID_CARGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MONTO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="NUMERO_TARJETA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_APLICACION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_TIPO_CARGO" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRIMER_APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SEGUNDO_APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CEDULA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_TIPO_CLIENTE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SALARIO" Type="Decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="ID_CUENTA" />
+          </Key>
+          <Property Name="ID_CUENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_TIPO_CUENTA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_CLIENTE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SALDO_REAL" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="PAGO_MINIMO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="SALDO_ULTIMO_PAGO_MINIMO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="INTERESES_MORATORIOS" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="SALDO_PAGO_CONTADO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="SALDO_CORTE" Type="Decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="MARCA_TARJETA">
+          <Key>
+            <PropertyRef Name="ID_MARCA_TARJETA" />
+          </Key>
+          <Property Name="ID_MARCA_TARJETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MARCA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PAGO">
+          <Key>
+            <PropertyRef Name="ID_PAGO" />
+          </Key>
+          <Property Name="ID_PAGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MONTO_PAGO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="TARJETA">
+          <Key>
+            <PropertyRef Name="ID_TARJETA" />
+          </Key>
+          <Property Name="ID_TARJETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NUMERO_TARJETA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_CUENTA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_MARCA_TARJETA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CODIGO_SEGURIDAD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LIMITE" Type="Decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="TIPO_CARGO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_CARGO" />
+          </Key>
+          <Property Name="ID_TIPO_CARGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO_CARGO1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TIPO_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_TIPO_CLIENTE" />
+          </Key>
+          <Property Name="ID_TIPO_CLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO_CLIENTE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TIPO_CUENTA">
+          <Key>
+            <PropertyRef Name="ID_TIPO_CUENTA" />
+          </Key>
+          <Property Name="ID_TIPO_CUENTA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO_CUENTA1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TASA_INTERES_DIARIA" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="TASA_MORA" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="DIAS_PAGO_MINIMO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DIAS_PAGO_CONTADO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DIA_CORTE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="COMISION_RETIRO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="COMISION_ADMINISTRACION" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="MESES_FINANCIACION" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="TIPO_TRANSACCION">
+          <Key>
+            <PropertyRef Name="ID_TIPO_TRANSACCION" />
+          </Key>
+          <Property Name="ID_TIPO_TRANSACCION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TIPO_TRANSACCION1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TRANSACCION">
+          <Key>
+            <PropertyRef Name="ID_TRANSACCION" />
+          </Key>
+          <Property Name="ID_TRANSACCION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIPO_TRANSACCION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MONTO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="NUMERO_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUENTA_REFERENCIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CARGO_AUTOMATICO" EntityType="Self.CARGO_AUTOMATICO" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" />
+          <EntitySet Name="MARCA_TARJETA" EntityType="Self.MARCA_TARJETA" />
+          <EntitySet Name="PAGO" EntityType="Self.PAGO" />
+          <EntitySet Name="TARJETA" EntityType="Self.TARJETA" />
+          <EntitySet Name="TIPO_CARGO" EntityType="Self.TIPO_CARGO" />
+          <EntitySet Name="TIPO_CLIENTE" EntityType="Self.TIPO_CLIENTE" />
+          <EntitySet Name="TIPO_CUENTA" EntityType="Self.TIPO_CUENTA" />
+          <EntitySet Name="TIPO_TRANSACCION" EntityType="Self.TIPO_TRANSACCION" />
+          <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" />
+          <FunctionImport Name="ACTUALIZAR_CARGO_AUTOMATICO">
+            <Parameter Name="ID_CARGOP" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTOP" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMERO_TARJETAP" Mode="In" Type="String" />
+            <Parameter Name="FECHA_APLICACIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_TIPO_CARGOP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_CLIENTE">
+            <Parameter Name="ID_CLIENTE_P" Mode="In" Type="String" />
+            <Parameter Name="NOMBRE_P" Mode="In" Type="String" />
+            <Parameter Name="PRIMER_APELLIDO_P" Mode="In" Type="String" />
+            <Parameter Name="SEGUNDO_APELLIDO_P" Mode="In" Type="String" />
+            <Parameter Name="CEDULA_P" Mode="In" Type="String" />
+            <Parameter Name="ID_TIPO_CLIENTE" Mode="In" Type="Decimal" />
+            <Parameter Name="SALARIO_P" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_MARCA_TARJETA">
+            <Parameter Name="ID_MARCA_TARJETAP" Mode="In" Type="Decimal" />
+            <Parameter Name="MARCAP" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_PAGO">
+            <Parameter Name="ID_PAGOP" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMERO_CUENTAP" Mode="In" Type="String" />
+            <Parameter Name="MONTO_PAGOP" Mode="In" Type="Decimal" />
+            <Parameter Name="FECHAP" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_TARJETA">
+            <Parameter Name="ID_TARJETAP" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMERO_TARJETAP" Mode="In" Type="String" />
+            <Parameter Name="ID_CUENTAP" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_MARCA_TARJETAP" Mode="In" Type="Decimal" />
+            <Parameter Name="CODIGO_SEGURIDADP" Mode="In" Type="String" />
+            <Parameter Name="LIMITEP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_TIPO_CARGO">
+            <Parameter Name="ID_TIPO_CARGOP" Mode="In" Type="Decimal" />
+            <Parameter Name="TIPO_CARGOP" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_TIPOCLIENTE">
+            <Parameter Name="ID_TIPO_CLIENTEP" Mode="In" Type="Decimal" />
+            <Parameter Name="TIPO_CLIENTEP" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_TIPOCUENTA">
+            <Parameter Name="ID_TIPO_CUENTAP" Mode="In" Type="Decimal" />
+            <Parameter Name="TIPO_CUENTAP" Mode="In" Type="String" />
+            <Parameter Name="TASA_INTERES_DIARIAP" Mode="In" Type="Decimal" />
+            <Parameter Name="TASA_MORAP" Mode="In" Type="Decimal" />
+            <Parameter Name="DIAS_PAGO_MINIMOP" Mode="In" Type="Decimal" />
+            <Parameter Name="DIAS_PAGO_CONTADOP" Mode="In" Type="Decimal" />
+            <Parameter Name="DIA_CORTEP" Mode="In" Type="Decimal" />
+            <Parameter Name="COMISION_RETIROP" Mode="In" Type="Decimal" />
+            <Parameter Name="COMISION_ADMINISTRACIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="MESES_FINANCIACIONP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_TIPO_TRANSACCION">
+            <Parameter Name="ID_TIPO_TRANSACCIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="TIPO_TRANSACCIONP" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ACTUALIZAR_TRANSACCION">
+            <Parameter Name="ID_TRANSACCIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_TIPO_TRANSACCIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTOP" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMERO_CUENTAP" Mode="In" Type="String" />
+            <Parameter Name="CUENTA_REFERENCIAP" Mode="In" Type="String" />
+            <Parameter Name="FECHAP" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_CARGO_AUTOMATICO">
+            <Parameter Name="ID_CARGOP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_CLIENTE">
+            <Parameter Name="ID_CLIENTE_P" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_CUENTA">
+            <Parameter Name="ID_CUENTAP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_MARCA_TARJETA">
+            <Parameter Name="ID_MARCA_TARJETAP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_PAGO">
+            <Parameter Name="ID_PAGOP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_TARJETA">
+            <Parameter Name="ID_TARJETAP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_TIPO_CARGO">
+            <Parameter Name="ID_TIPO_CARGOP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_TIPOCLIENTE">
+            <Parameter Name="ID_TIPOCLIENTE_P" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_TIPOCUENTA">
+            <Parameter Name="ID_TIPOCUENTA_P" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_TIPO_TRANSACCION">
+            <Parameter Name="ID_TIPO_TRANSACCIONP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ELIMINAR_TRANSACCION">
+            <Parameter Name="ID_TRANSACCIONP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_CARGO_AUTOMATICO">
+            <Parameter Name="ID_CARGOP" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTOP" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMERO_TARJETAP" Mode="In" Type="String" />
+            <Parameter Name="FECHA_APLICACIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_TIPO_CARGOP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_CLIENTE">
+            <Parameter Name="ID_CLIENTE_P" Mode="In" Type="String" />
+            <Parameter Name="NOMBRE_P" Mode="In" Type="String" />
+            <Parameter Name="PRIMER_APELLIDO_P" Mode="In" Type="String" />
+            <Parameter Name="SEGUNDO_APELLIDO_P" Mode="In" Type="String" />
+            <Parameter Name="CEDULA_P" Mode="In" Type="String" />
+            <Parameter Name="ID_TIPO_CLIENTE" Mode="In" Type="Decimal" />
+            <Parameter Name="SALARIO_P" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_MARCA_TARJETA">
+            <Parameter Name="ID_MARCA_TARJETAP" Mode="In" Type="Decimal" />
+            <Parameter Name="MARCAP" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_PAGO">
+            <Parameter Name="ID_PAGOP" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMERO_CUENTAP" Mode="In" Type="String" />
+            <Parameter Name="MONTO_PAGOP" Mode="In" Type="Decimal" />
+            <Parameter Name="FECHAP" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_TARJETA">
+            <Parameter Name="ID_TARJETAP" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMERO_TARJETAP" Mode="In" Type="String" />
+            <Parameter Name="ID_CUENTAP" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_MARCA_TARJETAP" Mode="In" Type="Decimal" />
+            <Parameter Name="CODIGO_SEGURIDADP" Mode="In" Type="String" />
+            <Parameter Name="LIMITEP" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_TIPO_CARGO">
+            <Parameter Name="ID_TIPO_CARGOP" Mode="In" Type="Decimal" />
+            <Parameter Name="TIPO_CARGOP" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_TIPOCLIENTE">
+            <Parameter Name="ID_TIPO_CLIENTEP" Mode="In" Type="Decimal" />
+            <Parameter Name="TIPO_CLIENTEP" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_TIPOCUENTA">
+            <Parameter Name="ID_TIPO_CUENTAP" Mode="In" Type="Decimal" />
+            <Parameter Name="TIPO_CUENTAP" Mode="In" Type="String" />
+            <Parameter Name="TASA_INTERES_DIARIAP" Mode="In" Type="Decimal" />
+            <Parameter Name="TASA_MORAP" Mode="In" Type="Decimal" />
+            <Parameter Name="DIAS_PAGO_MINIMOP" Mode="In" Type="Decimal" />
+            <Parameter Name="DIAS_PAGO_CONTADOP" Mode="In" Type="Decimal" />
+            <Parameter Name="DIA_CORTEP" Mode="In" Type="Decimal" />
+            <Parameter Name="COMISION_RETIROP" Mode="In" Type="Decimal" />
+            <Parameter Name="COMISION_ADMINISTRACIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="MESES_FINANCIACION" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_TIPO_TRANSACCION">
+            <Parameter Name="ID_TIPO_TRANSACCIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="TIPO_TRANSACCIONP" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="INSERTAR_TRANSACCION">
+            <Parameter Name="ID_TRANSACCIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="ID_TIPO_TRANSACCIONP" Mode="In" Type="Decimal" />
+            <Parameter Name="MONTOP" Mode="In" Type="Decimal" />
+            <Parameter Name="NUMERO_CUENTAP" Mode="In" Type="String" />
+            <Parameter Name="CUENTA_REFERENCIAP" Mode="In" Type="String" />
+            <Parameter Name="FECHAP" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="OBTENER_CARGO_AUTOMATICO" />
+          <FunctionImport Name="OBTENER_CLIENTES" />
+          <FunctionImport Name="OBTENER_CUENTA" />
+          <FunctionImport Name="OBTENER_MARCA_TARJETA" />
+          <FunctionImport Name="OBTENER_PAGO" />
+          <FunctionImport Name="OBTENER_TARJETA" />
+          <FunctionImport Name="OBTENER_TIPO_CARGO" />
+          <FunctionImport Name="OBTENER_TIPO_CLIENTES" />
+          <FunctionImport Name="OBTENER_TIPO_TRANSACCION" />
+          <FunctionImport Name="OBTENER_TRANSACCION" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="CARGO_AUTOMATICO">
+            <EntityTypeMapping TypeName="Model.CARGO_AUTOMATICO">
+              <MappingFragment StoreEntitySet="CARGO_AUTOMATICO">
+                <ScalarProperty Name="ID_CARGO" ColumnName="ID_CARGO" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="NUMERO_TARJETA" ColumnName="NUMERO_TARJETA" />
+                <ScalarProperty Name="FECHA_APLICACION" ColumnName="FECHA_APLICACION" />
+                <ScalarProperty Name="ID_TIPO_CARGO" ColumnName="ID_TIPO_CARGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="Model.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PRIMER_APELLIDO" ColumnName="PRIMER_APELLIDO" />
+                <ScalarProperty Name="SEGUNDO_APELLIDO" ColumnName="SEGUNDO_APELLIDO" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="ID_TIPO_CLIENTE" ColumnName="ID_TIPO_CLIENTE" />
+                <ScalarProperty Name="SALARIO" ColumnName="SALARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUENTA">
+            <EntityTypeMapping TypeName="Model.CUENTA">
+              <MappingFragment StoreEntitySet="CUENTA">
+                <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+                <ScalarProperty Name="NUMERO_CUENTA" ColumnName="NUMERO_CUENTA" />
+                <ScalarProperty Name="ID_TIPO_CUENTA" ColumnName="ID_TIPO_CUENTA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="SALDO_REAL" ColumnName="SALDO_REAL" />
+                <ScalarProperty Name="PAGO_MINIMO" ColumnName="PAGO_MINIMO" />
+                <ScalarProperty Name="SALDO_ULTIMO_PAGO_MINIMO" ColumnName="SALDO_ULTIMO_PAGO_MINIMO" />
+                <ScalarProperty Name="INTERESES_MORATORIOS" ColumnName="INTERESES_MORATORIOS" />
+                <ScalarProperty Name="SALDO_PAGO_CONTADO" ColumnName="SALDO_PAGO_CONTADO" />
+                <ScalarProperty Name="SALDO_CORTE" ColumnName="SALDO_CORTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARCA_TARJETA">
+            <EntityTypeMapping TypeName="Model.MARCA_TARJETA">
+              <MappingFragment StoreEntitySet="MARCA_TARJETA">
+                <ScalarProperty Name="ID_MARCA_TARJETA" ColumnName="ID_MARCA_TARJETA" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAGO">
+            <EntityTypeMapping TypeName="Model.PAGO">
+              <MappingFragment StoreEntitySet="PAGO">
+                <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
+                <ScalarProperty Name="NUMERO_CUENTA" ColumnName="NUMERO_CUENTA" />
+                <ScalarProperty Name="MONTO_PAGO" ColumnName="MONTO_PAGO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TARJETA">
+            <EntityTypeMapping TypeName="Model.TARJETA">
+              <MappingFragment StoreEntitySet="TARJETA">
+                <ScalarProperty Name="ID_TARJETA" ColumnName="ID_TARJETA" />
+                <ScalarProperty Name="NUMERO_TARJETA" ColumnName="NUMERO_TARJETA" />
+                <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+                <ScalarProperty Name="ID_MARCA_TARJETA" ColumnName="ID_MARCA_TARJETA" />
+                <ScalarProperty Name="CODIGO_SEGURIDAD" ColumnName="CODIGO_SEGURIDAD" />
+                <ScalarProperty Name="LIMITE" ColumnName="LIMITE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CARGO">
+            <EntityTypeMapping TypeName="Model.TIPO_CARGO">
+              <MappingFragment StoreEntitySet="TIPO_CARGO">
+                <ScalarProperty Name="ID_TIPO_CARGO" ColumnName="ID_TIPO_CARGO" />
+                <ScalarProperty Name="TIPO_CARGO1" ColumnName="TIPO_CARGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CLIENTE">
+            <EntityTypeMapping TypeName="Model.TIPO_CLIENTE">
+              <MappingFragment StoreEntitySet="TIPO_CLIENTE">
+                <ScalarProperty Name="ID_TIPO_CLIENTE" ColumnName="ID_TIPO_CLIENTE" />
+                <ScalarProperty Name="TIPO_CLIENTE1" ColumnName="TIPO_CLIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CUENTA">
+            <EntityTypeMapping TypeName="Model.TIPO_CUENTA">
+              <MappingFragment StoreEntitySet="TIPO_CUENTA">
+                <ScalarProperty Name="ID_TIPO_CUENTA" ColumnName="ID_TIPO_CUENTA" />
+                <ScalarProperty Name="TIPO_CUENTA1" ColumnName="TIPO_CUENTA" />
+                <ScalarProperty Name="TASA_INTERES_DIARIA" ColumnName="TASA_INTERES_DIARIA" />
+                <ScalarProperty Name="TASA_MORA" ColumnName="TASA_MORA" />
+                <ScalarProperty Name="DIAS_PAGO_MINIMO" ColumnName="DIAS_PAGO_MINIMO" />
+                <ScalarProperty Name="DIAS_PAGO_CONTADO" ColumnName="DIAS_PAGO_CONTADO" />
+                <ScalarProperty Name="DIA_CORTE" ColumnName="DIA_CORTE" />
+                <ScalarProperty Name="COMISION_RETIRO" ColumnName="COMISION_RETIRO" />
+                <ScalarProperty Name="COMISION_ADMINISTRACION" ColumnName="COMISION_ADMINISTRACION" />
+                <ScalarProperty Name="MESES_FINANCIACION" ColumnName="MESES_FINANCIACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_TRANSACCION">
+            <EntityTypeMapping TypeName="Model.TIPO_TRANSACCION">
+              <MappingFragment StoreEntitySet="TIPO_TRANSACCION">
+                <ScalarProperty Name="ID_TIPO_TRANSACCION" ColumnName="ID_TIPO_TRANSACCION" />
+                <ScalarProperty Name="TIPO_TRANSACCION1" ColumnName="TIPO_TRANSACCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACCION">
+            <EntityTypeMapping TypeName="Model.TRANSACCION">
+              <MappingFragment StoreEntitySet="TRANSACCION">
+                <ScalarProperty Name="ID_TRANSACCION" ColumnName="ID_TRANSACCION" />
+                <ScalarProperty Name="ID_TIPO_TRANSACCION" ColumnName="ID_TIPO_TRANSACCION" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="NUMERO_CUENTA" ColumnName="NUMERO_CUENTA" />
+                <ScalarProperty Name="CUENTA_REFERENCIA" ColumnName="CUENTA_REFERENCIA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_CARGO_AUTOMATICO" FunctionName="Model.Store.ACTUALIZAR_CARGO_AUTOMATICO" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_CLIENTE" FunctionName="Model.Store.ACTUALIZAR_CLIENTE" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_MARCA_TARJETA" FunctionName="Model.Store.ACTUALIZAR_MARCA_TARJETA" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_PAGO" FunctionName="Model.Store.ACTUALIZAR_PAGO" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_TARJETA" FunctionName="Model.Store.ACTUALIZAR_TARJETA" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_TIPO_CARGO" FunctionName="Model.Store.ACTUALIZAR_TIPO_CARGO" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_TIPOCLIENTE" FunctionName="Model.Store.ACTUALIZAR_TIPOCLIENTE" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_TIPOCUENTA" FunctionName="Model.Store.ACTUALIZAR_TIPOCUENTA" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_TIPO_TRANSACCION" FunctionName="Model.Store.ACTUALIZAR_TIPO_TRANSACCION" />
+          <FunctionImportMapping FunctionImportName="ACTUALIZAR_TRANSACCION" FunctionName="Model.Store.ACTUALIZAR_TRANSACCION" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_CARGO_AUTOMATICO" FunctionName="Model.Store.ELIMINAR_CARGO_AUTOMATICO" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_CLIENTE" FunctionName="Model.Store.ELIMINAR_CLIENTE" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_CUENTA" FunctionName="Model.Store.ELIMINAR_CUENTA" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_MARCA_TARJETA" FunctionName="Model.Store.ELIMINAR_MARCA_TARJETA" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_PAGO" FunctionName="Model.Store.ELIMINAR_PAGO" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_TARJETA" FunctionName="Model.Store.ELIMINAR_TARJETA" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_TIPO_CARGO" FunctionName="Model.Store.ELIMINAR_TIPO_CARGO" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_TIPOCLIENTE" FunctionName="Model.Store.ELIMINAR_TIPOCLIENTE" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_TIPOCUENTA" FunctionName="Model.Store.ELIMINAR_TIPOCUENTA" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_TIPO_TRANSACCION" FunctionName="Model.Store.ELIMINAR_TIPO_TRANSACCION" />
+          <FunctionImportMapping FunctionImportName="ELIMINAR_TRANSACCION" FunctionName="Model.Store.ELIMINAR_TRANSACCION" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_CARGO_AUTOMATICO" FunctionName="Model.Store.INSERTAR_CARGO_AUTOMATICO" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_CLIENTE" FunctionName="Model.Store.INSERTAR_CLIENTE" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_MARCA_TARJETA" FunctionName="Model.Store.INSERTAR_MARCA_TARJETA" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_PAGO" FunctionName="Model.Store.INSERTAR_PAGO" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_TARJETA" FunctionName="Model.Store.INSERTAR_TARJETA" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_TIPO_CARGO" FunctionName="Model.Store.INSERTAR_TIPO_CARGO" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_TIPOCLIENTE" FunctionName="Model.Store.INSERTAR_TIPOCLIENTE" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_TIPOCUENTA" FunctionName="Model.Store.INSERTAR_TIPOCUENTA" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_TIPO_TRANSACCION" FunctionName="Model.Store.INSERTAR_TIPO_TRANSACCION" />
+          <FunctionImportMapping FunctionImportName="INSERTAR_TRANSACCION" FunctionName="Model.Store.INSERTAR_TRANSACCION" />
+          <FunctionImportMapping FunctionImportName="OBTENER_CARGO_AUTOMATICO" FunctionName="Model.Store.OBTENER_CARGO_AUTOMATICO" />
+          <FunctionImportMapping FunctionImportName="OBTENER_CLIENTES" FunctionName="Model.Store.OBTENER_CLIENTES" />
+          <FunctionImportMapping FunctionImportName="OBTENER_CUENTA" FunctionName="Model.Store.OBTENER_CUENTA" />
+          <FunctionImportMapping FunctionImportName="OBTENER_MARCA_TARJETA" FunctionName="Model.Store.OBTENER_MARCA_TARJETA" />
+          <FunctionImportMapping FunctionImportName="OBTENER_PAGO" FunctionName="Model.Store.OBTENER_PAGO" />
+          <FunctionImportMapping FunctionImportName="OBTENER_TARJETA" FunctionName="Model.Store.OBTENER_TARJETA" />
+          <FunctionImportMapping FunctionImportName="OBTENER_TIPO_CARGO" FunctionName="Model.Store.OBTENER_TIPO_CARGO" />
+          <FunctionImportMapping FunctionImportName="OBTENER_TIPO_CLIENTES" FunctionName="Model.Store.OBTENER_TIPO_CLIENTES" />
+          <FunctionImportMapping FunctionImportName="OBTENER_TIPO_TRANSACCION" FunctionName="Model.Store.OBTENER_TIPO_TRANSACCION" />
+          <FunctionImportMapping FunctionImportName="OBTENER_TRANSACCION" FunctionName="Model.Store.OBTENER_TRANSACCION" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
